@@ -1,0 +1,23 @@
+---
+version: "2.1"
+services:
+  freshrss:
+    image: lscr.io/linuxserver/freshrss
+    container_name: freshrss
+    environment:
+      - PUID=1034
+      - PGID=100
+      - TZ=Europe/Berlin
+    volumes:
+      - /volume1/docker/freshrss/config:/config
+    ports:
+      - 80:80
+    restart: unless-stopped
+    networks: 
+          default:
+            ipv4_address: 192.168.178.234
+networks:
+  default:
+    external:
+      name: MacVlan1
+      #192.168.178.225/27 gives all addresses from 192.168.178.224 up to 192.168.178.254
